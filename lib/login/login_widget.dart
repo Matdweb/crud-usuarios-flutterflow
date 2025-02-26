@@ -407,8 +407,8 @@ class _LoginWidgetState extends State<LoginWidget>
                               return;
                             }
 
-                            context.goNamedAuth(
-                                HomeWidget.routeName, context.mounted);
+                            context.goNamedAuth(ListarUsuariosWidget.routeName,
+                                context.mounted);
                           },
                           text: 'Login',
                           options: FFButtonOptions(
@@ -457,8 +457,8 @@ class _LoginWidgetState extends State<LoginWidget>
                               return;
                             }
 
-                            context.goNamedAuth(
-                                HomeWidget.routeName, context.mounted);
+                            context.goNamedAuth(ListarUsuariosWidget.routeName,
+                                context.mounted);
                           },
                           text: 'Create Account',
                           options: FFButtonOptions(
@@ -575,7 +575,8 @@ class _LoginWidgetState extends State<LoginWidget>
                                         return;
                                       }
 
-                                      context.goNamedAuth(HomeWidget.routeName,
+                                      context.goNamedAuth(
+                                          ListarUsuariosWidget.routeName,
                                           context.mounted);
                                     },
                                     text: 'Continue with Google',
