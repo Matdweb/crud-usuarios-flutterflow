@@ -121,13 +121,22 @@ class _ListarUsuariosWidgetState extends State<ListarUsuariosWidget> {
                 children: [
                   Padding(
                     padding: EdgeInsets.all(20.0),
-                    child: Text(
-                      'Listado de Usuarios',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            letterSpacing: 0.0,
-                          ),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed(SumarWidget.routeName);
+                      },
+                      child: Text(
+                        'Listado de Usuarios',
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
                     ),
                   ),
                   Column(

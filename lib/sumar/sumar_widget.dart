@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'sumar_model.dart';
@@ -218,8 +219,7 @@ class _SumarWidgetState extends State<SumarWidget> {
                                 controller: _model.num2TextController,
                                 focusNode: _model.num2FocusNode,
                                 autofocus: false,
-                                textCapitalization: TextCapitalization.none,
-                                obscureText: !_model.num2Visibility,
+                                obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Numero 2',
                                   labelStyle: FlutterFlowTheme.of(context)
@@ -276,20 +276,6 @@ class _SumarWidgetState extends State<SumarWidget> {
                                   contentPadding:
                                       EdgeInsetsDirectional.fromSTEB(
                                           0.0, 16.0, 16.0, 8.0),
-                                  suffixIcon: InkWell(
-                                    onTap: () => safeSetState(
-                                      () => _model.num2Visibility =
-                                          !_model.num2Visibility,
-                                    ),
-                                    focusNode: FocusNode(skipTraversal: true),
-                                    child: Icon(
-                                      _model.num2Visibility
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined,
-                                      color: Color(0xFF101213),
-                                      size: 24.0,
-                                    ),
-                                  ),
                                 ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyLarge
@@ -312,17 +298,43 @@ class _SumarWidgetState extends State<SumarWidget> {
                                 controller: _model.resultadoTextController,
                                 focusNode: _model.resultadoFocusNode,
                                 autofocus: false,
+                                readOnly: true,
                                 obscureText: false,
                                 decoration: InputDecoration(
                                   labelText: 'Resultado',
                                   labelStyle: FlutterFlowTheme.of(context)
-                                      .labelLarge
+                                      .bodyLarge
                                       .override(
                                         fontFamily: 'Plus Jakarta Sans',
-                                        color: Color(0xFF57636C),
+                                        color: Color(0xFF101213),
                                         fontSize: 16.0,
                                         letterSpacing: 0.0,
                                         fontWeight: FontWeight.w500,
+                                        lineHeight: 3.0,
+                                      ),
+                                  hintText: valueOrDefault<String>(
+                                    functions
+                                        .sumar(
+                                            valueOrDefault<String>(
+                                              _model.num1TextController.text,
+                                              '0',
+                                            ),
+                                            valueOrDefault<String>(
+                                              _model.num2TextController.text,
+                                              '0',
+                                            ))
+                                        .toString(),
+                                    '0',
+                                  ),
+                                  hintStyle: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        fontFamily: 'Plus Jakarta Sans',
+                                        color: Color(0xFF101213),
+                                        fontSize: 16.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.w500,
+                                        lineHeight: 3.0,
                                       ),
                                   enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
@@ -397,8 +409,36 @@ class _SumarWidgetState extends State<SumarWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(
                           16.0, 12.0, 16.0, 24.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('btnSuma pressed ...');
+                        onPressed: () async {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('Total'),
+                                content: Text(valueOrDefault<String>(
+                                  functions
+                                      .sumar(
+                                          valueOrDefault<String>(
+                                            _model.num1TextController.text,
+                                            '0',
+                                          ),
+                                          valueOrDefault<String>(
+                                            _model.num2TextController.text,
+                                            '0',
+                                          ))
+                                      .toString(),
+                                  '0',
+                                )),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Confirmar'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         text: 'Sumar numeros',
                         options: FFButtonOptions(

@@ -12,7 +12,6 @@ class SumarModel extends FlutterFlowModel<SumarWidget> {
   // State field(s) for num2 widget.
   FocusNode? num2FocusNode;
   TextEditingController? num2TextController;
-  late bool num2Visibility;
   String? Function(BuildContext, String?)? num2TextControllerValidator;
   // State field(s) for resultado widget.
   FocusNode? resultadoFocusNode;
@@ -20,9 +19,7 @@ class SumarModel extends FlutterFlowModel<SumarWidget> {
   String? Function(BuildContext, String?)? resultadoTextControllerValidator;
 
   @override
-  void initState(BuildContext context) {
-    num2Visibility = false;
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
