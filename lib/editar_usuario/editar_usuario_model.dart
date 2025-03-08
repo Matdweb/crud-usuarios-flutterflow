@@ -1,14 +1,20 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'editar_usuario_widget.dart' show EditarUsuarioWidget;
 import 'package:flutter/material.dart';
 
 class EditarUsuarioModel extends FlutterFlowModel<EditarUsuarioWidget> {
   ///  State fields for stateful widgets in this page.
 
-  bool isDataUploading = false;
-  FFUploadedFile uploadedLocalFile =
+  bool isDataUploading1 = false;
+  FFUploadedFile uploadedLocalFile1 =
       FFUploadedFile(bytes: Uint8List.fromList([]));
-  String uploadedFileUrl = '';
+  String uploadedFileUrl1 = '';
+
+  bool isDataUploading2 = false;
+  FFUploadedFile uploadedLocalFile2 =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl2 = '';
 
   // State field(s) for Correo widget.
   FocusNode? correoFocusNode;

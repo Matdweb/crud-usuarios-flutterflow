@@ -99,7 +99,16 @@ class _ListarUsuariosWidgetState extends State<ListarUsuariosWidget> {
                       letterSpacing: 0.0,
                     ),
               ),
-              actions: [],
+              actions: [
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                  child: Icon(
+                    Icons.person_add,
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    size: 28.0,
+                  ),
+                ),
+              ],
               centerTitle: true,
               elevation: 2.0,
             ),
@@ -282,8 +291,54 @@ class _ListarUsuariosWidgetState extends State<ListarUsuariosWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                          EditarUsuarioWidget
-                                                              .routeName);
+                                                        EditarUsuarioWidget
+                                                            .routeName,
+                                                        queryParameters: {
+                                                          'imagenParametro':
+                                                              serializeParam(
+                                                            listViewUsersRecord
+                                                                .photoUrl,
+                                                            ParamType.String,
+                                                          ),
+                                                          'correoParametro':
+                                                              serializeParam(
+                                                            listViewUsersRecord
+                                                                .email,
+                                                            ParamType.String,
+                                                          ),
+                                                          'nombreParamentros':
+                                                              serializeParam(
+                                                            listViewUsersRecord
+                                                                .displayName,
+                                                            ParamType.String,
+                                                          ),
+                                                          'telefonoParametro':
+                                                              serializeParam(
+                                                            listViewUsersRecord
+                                                                .phoneNumber,
+                                                            ParamType.String,
+                                                          ),
+                                                          'rolParametro':
+                                                              serializeParam(
+                                                            listViewUsersRecord
+                                                                .rol,
+                                                            ParamType.String,
+                                                          ),
+                                                          'rolSwitchParametro':
+                                                              serializeParam(
+                                                            listViewUsersRecord
+                                                                .isAdmin,
+                                                            ParamType.bool,
+                                                          ),
+                                                          'eleccionUsuarioParametro':
+                                                              serializeParam(
+                                                            listViewUsersRecord
+                                                                .reference,
+                                                            ParamType
+                                                                .DocumentReference,
+                                                          ),
+                                                        }.withoutNulls,
+                                                      );
                                                     },
                                                     child: FaIcon(
                                                       FontAwesomeIcons.edit,
@@ -295,12 +350,64 @@ class _ListarUsuariosWidgetState extends State<ListarUsuariosWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                                Icon(
-                                                  Icons.delete_outline_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .error,
-                                                  size: 24.0,
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    var confirmDialogResponse =
+                                                        await showDialog<bool>(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      'Elimando Usuario'),
+                                                                  content: Text(
+                                                                      '¿Esta seguro de eliminar el usuario? '),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          false),
+                                                                      child: Text(
+                                                                          'Cancelar'),
+                                                                    ),
+                                                                    TextButton(
+                                                                      onPressed: () => Navigator.pop(
+                                                                          alertDialogContext,
+                                                                          true),
+                                                                      child: Text(
+                                                                          'Eliminar'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            ) ??
+                                                            false;
+                                                    if (confirmDialogResponse) {
+                                                      await listViewUsersRecord
+                                                          .reference
+                                                          .delete();
+                                                    } else {
+                                                      context.pushNamed(
+                                                          ListarUsuariosWidget
+                                                              .routeName);
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    Icons
+                                                        .delete_outline_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .error,
+                                                    size: 24.0,
+                                                  ),
                                                 ),
                                               ],
                                             ),

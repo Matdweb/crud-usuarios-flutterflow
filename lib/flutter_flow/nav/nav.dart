@@ -100,9 +100,55 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: EditarUsuarioWidget.routeName,
           path: EditarUsuarioWidget.routePath,
+          builder: (context, params) => EditarUsuarioWidget(
+            imagenParametro: params.getParam(
+              'imagenParametro',
+              ParamType.String,
+            ),
+            correoParametro: params.getParam(
+              'correoParametro',
+              ParamType.String,
+            ),
+            nombreParamentros: params.getParam(
+              'nombreParamentros',
+              ParamType.String,
+            ),
+            telefonoParametro: params.getParam(
+              'telefonoParametro',
+              ParamType.String,
+            ),
+            rolParametro: params.getParam(
+              'rolParametro',
+              ParamType.String,
+            ),
+            rolSwitchParametro: params.getParam(
+              'rolSwitchParametro',
+              ParamType.bool,
+            ),
+            eleccionUsuarioParametro: params.getParam(
+              'eleccionUsuarioParametro',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['users'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: PerfilUsuarioAutenticadoWidget.routeName,
+          path: PerfilUsuarioAutenticadoWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'EditarUsuario')
-              : EditarUsuarioWidget(),
+              ? NavBarPage(initialPage: 'PerfilUsuarioAutenticado')
+              : PerfilUsuarioAutenticadoWidget(),
+        ),
+        FFRoute(
+          name: CrearUsuariosWidget.routeName,
+          path: CrearUsuariosWidget.routePath,
+          builder: (context, params) => CrearUsuariosWidget(),
+        ),
+        FFRoute(
+          name: SumarWidget.routeName,
+          path: SumarWidget.routePath,
+          builder: (context, params) => SumarWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
