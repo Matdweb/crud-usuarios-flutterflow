@@ -102,10 +102,19 @@ class _ListarUsuariosWidgetState extends State<ListarUsuariosWidget> {
               actions: [
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-                  child: Icon(
-                    Icons.person_add,
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                    size: 28.0,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed(CrearUsuariosWidget.routeName);
+                    },
+                    child: Icon(
+                      Icons.person_add,
+                      color: FlutterFlowTheme.of(context).primaryBackground,
+                      size: 28.0,
+                    ),
                   ),
                 ),
               ],

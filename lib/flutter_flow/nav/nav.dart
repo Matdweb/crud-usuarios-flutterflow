@@ -148,7 +148,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: SumarWidget.routeName,
           path: SumarWidget.routePath,
-          builder: (context, params) => SumarWidget(),
+          builder: (context, params) =>
+              params.isEmpty ? NavBarPage(initialPage: 'Sumar') : SumarWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
